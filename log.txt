@@ -1,0 +1,287 @@
+SELECT Name, Language, Percentage FROM Country, CountryLanguage WHERE Code = 'USA' AND Code = CountryCode
+Name|Language|Percentage
+United States|Chinese|0.6
+United States|English|86.2
+United States|French|0.7
+United States|German|0.7
+United States|Italian|0.6
+United States|Japanese|0.2
+United States|Korean|0.3
+United States|Polish|0.3
+United States|Portuguese|0.2
+United States|Spanish|7.5
+United States|Tagalog|0.4
+United States|Vietnamese|0.2
+
+SELECT Name, LifeExpectancy, IndepYear FROM country WHERE continent = 'Europe' ORDER BY lifeexpectancy
+Name|LifeExpectancy|IndepYear
+Holy See (Vatican City State)||1929
+Svalbard and Jan Mayen||
+Moldova|64.5|1991
+Ukraine|66|1991
+Russian Federation|67.2|1991
+Belarus|68|1991
+Latvia|68.4|1991
+Lithuania|69.1|1991
+Estonia|69.5|1991
+Romania|69.9|1878
+Bulgaria|70.9|1908
+Hungary|71.4|1918
+Bosnia and Herzegovina|71.5|1992
+Albania|71.6|1912
+Yugoslavia|72.4|1918
+Poland|73.2|1918
+Croatia|73.7|1991
+Slovakia|73.7|1993
+Macedonia|73.8|1991
+Czech Republic|74.5|1993
+Slovenia|74.9|1991
+Portugal|75.8|1143
+Denmark|76.5|800
+Ireland|76.8|1921
+Luxembourg|77.1|1867
+Finland|77.4|1917
+Germany|77.4|1955
+Austria|77.7|1918
+United Kingdom|77.7|1066
+Belgium|77.8|1830
+Malta|77.9|1964
+Netherlands|78.3|1581
+Faroe Islands|78.4|
+Greece|78.4|1830
+Norway|78.7|1905
+France|78.8|843
+Liechtenstein|78.8|1806
+Monaco|78.8|1861
+Spain|78.8|1492
+Gibraltar|79|
+Italy|79|1861
+Iceland|79.4|1944
+Sweden|79.6|836
+Switzerland|79.6|1499
+San Marino|81.1|885
+Andorra|83.5|1278
+
+SELECT Name, LifeExpectancy FROM Country WHERE LifeExpectancy IN (SELECT MIN(LifeExpectancy) FROM country UNION SELECT MAX(LifeExpectancy) FROM Country) OR Code = 'USA'
+Name|LifeExpectancy
+Andorra|83.5
+Zambia|37.2
+United States|77.1
+
+SELECT Name, Percentage FROM Country, CountryLanguage WHERE Language = 'English' AND Percentage > 1.0 AND Code = CountryCode
+Name|Percentage
+Australia|81.2
+Belize|50.8
+Bermuda|100
+United Kingdom|97.3
+Gibraltar|88.9
+Guam|37.5
+Ireland|98.4
+Canada|60.4
+Trinidad and Tobago|93.5
+New Zealand|87
+United States|86.2
+Virgin Islands, U.S.|81.7
+Netherlands Antilles|7.8
+American Samoa|3.1
+Aruba|9.5
+Hong Kong|2.2
+Malta|2.1
+Puerto Rico|47.4
+Saint Lucia|20
+Seychelles|3.8
+Vanuatu|28.3
+Palau|3.2
+Zimbabwe|2.2
+Brunei|3.1
+Monaco|6.5
+South Africa|8.5
+Malaysia|1.6
+Nauru|7.5
+Northern Mariana Islands|4.8
+
+SELECT Population FROM Country WHERE Name = 'Iceland'
+Population
+279000
+
+SELECT COUNT(*) FROM Country
+COUNT(*)
+239
+
+SELECT COUNT(*) FROM CountryLanguage
+COUNT(*)
+984
+
+I CountryLanguage|'USA','C#','F',0.01
+INSERT INTO CountryLanguage VALUES ('USA','C#','F',0.01)
+OK, INSERT WORKED
+
+I CountryLanguage|'GBR','Java','F',0.01
+INSERT INTO CountryLanguage VALUES ('GBR','Java','F',0.01)
+OK, INSERT WORKED
+
+I CountryLanguage|CountryCode, Language|'DEU','Java'
+INSERT INTO CountryLanguage(CountryCode, Language) VALUES ('DEU','Java')
+OK, INSERT WORKED
+
+SELECT * FROM CountryLanguage WHERE Language = 'C#' OR Language = 'Java'
+CountryCode|Language|IsOfficial|Percentage
+USA|C#|F|0.01
+GBR|Java|F|0.01
+DEU|Java|F|0
+
+I Country|Code, Name, Population|'KZO','Kalamazoo',85000
+INSERT INTO Country(Code, Name, Population) VALUES ('KZO','Kalamazoo',85000)
+OK, INSERT WORKED
+
+I Country|Code, Name, HeadOfState, Continent, Region|'DIS','Disneyland','Mickey Mouse','North America','North America'
+INSERT INTO Country(Code, Name, HeadOfState, Continent, Region) VALUES ('DIS','Disneyland','Mickey Mouse','North America','North America')
+OK, INSERT WORKED
+
+SELECT Code, Name, Population, HeadOfState, Continent, Region FROM Country WHERE code = 'KZO' OR code = 'DIS'
+Code|Name|Population|HeadOfState|Continent|Region
+DIS|Disneyland|0|Mickey Mouse|North America|North America
+KZO|Kalamazoo|85000||Asia|
+
+D Country|Name|'Iceland'
+DELETE FROM Country WHERE Name = 'Iceland'
+OK, DELETE WORKED
+
+D Country|Name|'Faroe Islands'
+DELETE FROM Country WHERE Name = 'Faroe Islands'
+OK, DELETE WORKED
+
+D Country|Code|'SJM'
+DELETE FROM Country WHERE Code = 'SJM'
+OK, DELETE WORKED
+
+D CountryLanguage|Language|'Swedish'
+DELETE FROM CountryLanguage WHERE Language = 'Swedish'
+OK, DELETE WORKED
+
+D CountryLanguage|Language|'Russian'
+DELETE FROM CountryLanguage WHERE Language = 'Russian'
+OK, DELETE WORKED
+
+SELECT Name FROM Country WHERE Region = 'Nordic Countries'
+Name
+Norway
+Sweden
+Finland
+Denmark
+
+SELECT Name, Language FROM Country, CountryLanguage WHERE Region = 'Nordic Countries' AND Code = CountryCode
+Name|Language
+Norway|Danish
+Norway|English
+Norway|Norwegian
+Norway|Saame
+Sweden|Arabic
+Sweden|Finnish
+Sweden|Norwegian
+Sweden|Southern Slavic Languages
+Sweden|Spanish
+Finland|Estonian
+Finland|Finnish
+Finland|Saame
+Denmark|Arabic
+Denmark|Danish
+Denmark|English
+Denmark|German
+Denmark|Norwegian
+Denmark|Turkish
+
+SELECT Name, Language FROM Country, CountryLanguage WHERE Region = 'Nordic Countries' AND Percentage > 99.5
+Name|Language
+Norway|English
+Norway|Creole English
+Norway|Spanish
+Norway|Faroese
+Norway|Creole English
+Norway|Haiti Creole
+Norway|Arabic
+Norway|Crioulo
+Norway|Korean
+Norway|Korean
+Norway|Spanish
+Norway|Arabic
+Norway|Dhivehi
+Norway|Rwanda
+Norway|Creole English
+Norway|Italian
+Sweden|English
+Sweden|Creole English
+Sweden|Spanish
+Sweden|Faroese
+Sweden|Creole English
+Sweden|Haiti Creole
+Sweden|Arabic
+Sweden|Crioulo
+Sweden|Korean
+Sweden|Korean
+Sweden|Spanish
+Sweden|Arabic
+Sweden|Dhivehi
+Sweden|Rwanda
+Sweden|Creole English
+Sweden|Italian
+Finland|English
+Finland|Creole English
+Finland|Spanish
+Finland|Faroese
+Finland|Creole English
+Finland|Haiti Creole
+Finland|Arabic
+Finland|Crioulo
+Finland|Korean
+Finland|Korean
+Finland|Spanish
+Finland|Arabic
+Finland|Dhivehi
+Finland|Rwanda
+Finland|Creole English
+Finland|Italian
+Denmark|English
+Denmark|Creole English
+Denmark|Spanish
+Denmark|Faroese
+Denmark|Creole English
+Denmark|Haiti Creole
+Denmark|Arabic
+Denmark|Crioulo
+Denmark|Korean
+Denmark|Korean
+Denmark|Spanish
+Denmark|Arabic
+Denmark|Dhivehi
+Denmark|Rwanda
+Denmark|Creole English
+Denmark|Italian
+
+UPDATE Country SET HeadOfState = 'Barack Obama' WHERE Name = 'United States'
+OK, UPDATE WORKED
+
+UPDATE CountryLanguage SET language = 'American English' WHERE countryCode = 'USA' AND language = 'English'
+OK, UPDATE WORKED
+
+SELECT Name, HeadOfState FROM Country WHERE Code = 'USA'
+Name|HeadOfState
+United States|Barack Obama
+
+SELECT * FROM countryLanguage WHERE CountryCode = 'USA' AND Percentage > 0.5
+CountryCode|Language|IsOfficial|Percentage
+USA|American English|T|86.2
+USA|Chinese|F|0.6
+USA|French|F|0.7
+USA|German|F|0.7
+USA|Italian|F|0.6
+USA|Spanish|F|7.5
+
+SELECT COUNT(*) FROM Country
+COUNT(*)
+238
+
+SELECT COUNT(*) FROM CountryLanguage
+COUNT(*)
+966
+
