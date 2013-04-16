@@ -1,0 +1,29 @@
+A6 Demo Specs
+
+1) RE-Create a NEW version of the World DB in MySQL
+   (using WorldDriver, after removing:  SOURCE ... InsertCityData.sql)
+   so it's a FRESH NEW DB (since you've DELETEd/INSERTed/UPDATEd some
+   of the data in the tables during your program testing).
+
+2) run your PROGRAM using the WorldTrans.txt file
+   which creates a LogFile.txt
+
+3) hand in:
+   the LogFile.txt (printed in smaller font & landscape, as needed so
+        there's no/minimal wrap-around)
+   your program code (which is in 2+ physically separate files):
+	UserApp & DBHandler (or some similar name)
+	(and any other code files you wrote)
+
+
+I do NOT need to see anything which you did manually or with my
+SCRIPT (COMMAND) files in MySQL.  The LogFile will give me what I
+need to know with all those SELECT statements.
+
+---------------------------------------------------------------------
+
+CAUTION:
+ No hard-coding (like my Demo Program did) in your code of
+   - SQL queries themselves
+   - header-line column labels
+     (Either DON'T USE ANY HEADINGS or get them from the DBS)
